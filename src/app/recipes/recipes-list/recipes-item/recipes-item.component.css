@@ -1,0 +1,7 @@
+a:hover{
+    background-color: rgba(243, 242, 242, 0.5);
+}
+a{
+    color: #333;
+    border-radius: 4px !important;
+}
