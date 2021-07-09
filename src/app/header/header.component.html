@@ -16,13 +16,13 @@
       </ul>
 
     <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <li class="nav-item dropdown" ngbDropdown >
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ngbDropdownToggle>
             Manage <span class="caret"></span>
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Save Data</a>
-            <a class="dropdown-item" href="#">Fetch Data</a>
+          <div  class="dropdown-menu " ngbDropdownMenu >
+            <a class="dropdown-item" ngbDropdownItem href="#">Save Data</a>
+            <a class="dropdown-item" ngbDropdownItem href="#">Fetch Data</a>
           </div>
         </li>
     </ul>

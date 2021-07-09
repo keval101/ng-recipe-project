@@ -10,12 +10,12 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <div class="btn-group">
-            <button type="button" class="btn btn-primary dropdown-toggle"> Manage Recipe <span class="caret"></span></button>
-            <ul class="dropdown-menu">
-                <li><a href="#">To Shopping List</a></li>
-                <li><a href="#">Edit Recipe</a></li>
-                <li><a href="#">Delete Recipe</a></li>
+        <div class="btn-group" ngbDropdown >
+            <button type="button" class="btn btn-primary dropdown-toggle" ngbDropdownToggle> Manage Recipe <span class="caret"></span></button>
+            <ul class="dropdown-menu" ngbDropdownMenu>
+                <li class="dropdown-item" ngbDropdownItem><a href="#">To Shopping List</a></li>
+                <li class="dropdown-item" ngbDropdownItem><a href="#">Edit Recipe</a></li>
+                <li class="dropdown-item" ngbDropdownItem><a href="#">Delete Recipe</a></li>
             </ul>
         </div>
         
