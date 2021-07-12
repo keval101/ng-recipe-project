@@ -1,0 +1,7 @@
+a{
+    text-decoration: none;
+    color:#333
+}
+li:hover a{
+    color: #007bff;
+}
