@@ -5,3 +5,9 @@ a{
 li:hover a{
     color: #007bff;
 }
+li:active{
+  background-color: 007bff;
+}
+li:active a{
+  color:white
+}

@@ -1,6 +1,12 @@
 a:hover{
-    background-color: rgba(243, 242, 242, 0.5);
+    background-color: rgba(243, 242, 242, 0.6);
 }
+.list-group-item.active{
+  background-color: rgba(243, 242, 242, 0.6);
+  color:#333;
+  border-color: rgba(0 , 0, 0, 0.3);
+}
+
 a{
     color: #333;
     border-radius: 4px !important;
