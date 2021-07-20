@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Ingredients } from '../shared/ingredients.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
@@ -10,8 +10,7 @@ import { Recipe } from './recipes.model';
 })
 export class RecipeService {
 
-  constructor(private shoppingListService:ShoppingListService) { }
-
+  recipesChanged = new Subject<Recipe[]>();
 
   private recipes: Recipe[] = [
     new Recipe(
@@ -22,7 +21,7 @@ export class RecipeService {
         new Ingredients('Meat', 1),
         new Ingredients('French Fries', 20)
       ]),
-    new Recipe('Dish Two',
+      new Recipe('Dish Two',
     'this dish two is a simply test',
     'https://static01.nyt.com/images/2021/03/28/dining/mc-shakshuka/mc-shakshuka-articleLarge.jpg',
     [
@@ -30,6 +29,8 @@ export class RecipeService {
       new Ingredients('Meat', 1)
     ])
   ];
+
+  constructor(private shoppingListService:ShoppingListService) { }
 
   getRecipe(){
     return this.recipes.slice();
@@ -41,5 +42,20 @@ export class RecipeService {
 
   addIngredientsToShoppingList(ingredients:Ingredients[]){
     this.shoppingListService.addIngredients(ingredients);
+  }
+
+  addRecipe(recipe:Recipe){
+    this.recipes.push(recipe);
+    this.recipesChanged.next(this.recipes.slice())
+  }
+
+  updateRecipe(index:number, newRecipe:Recipe){
+    this.recipes[index] = newRecipe;
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  deleteRecipe(index:number){
+    this.recipes.splice(index, 1);
+    this.recipesChanged.next(this.recipes.slice());
   }
 }

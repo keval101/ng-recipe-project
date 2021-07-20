@@ -2,8 +2,8 @@
   <div class="col-12">
     <form [formGroup] = 'recipeForm' (ngSubmit) = "onSubmit()">
       <div class="col-12 p-0 mb-3">
-        <button type = "submit" class="btn btn-success mr-3">Save</button>
-        <button type = "button" class="btn btn-danger">Cancel</button>
+        <button type = "submit" class="btn btn-success mr-3" [disabled]="!recipeForm.valid" [ngStyle]="{'cursor': !recipeForm.valid ? 'not-allowed' : 'pointer'}">Save</button>
+        <button type = "button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
       </div>
 
       <div class="row">
@@ -20,7 +20,7 @@
         <div class="col-12">
           <div class="form-group">
             <label for="imagePath">Image URL </label>
-            <input type="text" name="imagePath" class="form-control" formControlName="imagePath">
+            <input type="text" name="imagePath" class="form-control" formControlName="imagePath" #imagePath>
           </div>
         </div>
       </div>
@@ -29,7 +29,7 @@
       <div class="row">
         <div class="col-12">
           <div class="form-group">
-            <img src='' class="img-fluid">
+            <img [src]="imagePath.value" class="img-fluid">
           </div>
         </div>
       </div>
@@ -58,9 +58,13 @@
             </div>
 
             <div class="col-2">
-              <button class="btn btn-danger" type="button">X</button>
+              <button class="btn btn-danger" type="button" (click)="deleteIngredients(i)">X</button>
             </div>
 
+          </div>
+
+          <div class="col-12 p-0 mt-3">
+            <button class="btn btn-primary" (click)="onAddIngrdients()" type="button">Add Ingredients</button>
           </div>
         </div>
       </div>

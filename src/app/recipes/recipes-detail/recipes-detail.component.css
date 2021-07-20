@@ -2,8 +2,10 @@ a{
     text-decoration: none;
     color:#333
 }
-li:hover a{
+li:hover a,
+li:hover{
     color: #007bff;
+    cursor: pointer;
 }
 li:active{
   background-color: 007bff;
@@ -11,3 +13,4 @@ li:active{
 li:active a{
   color:white
 }
+

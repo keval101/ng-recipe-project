@@ -15,7 +15,7 @@
             <ul class="dropdown-menu" ngbDropdownMenu>
                 <li class="dropdown-item" ngbDropdownItem><a (click) = "onAddToShoppingList()" style="cursor: pointer;">To Shopping List</a></li>
                 <li class="dropdown-item" ngbDropdownItem [routerLink] = "['edit']"><a >Edit Recipe</a></li>
-                <li class="dropdown-item" ngbDropdownItem><a >Delete Recipe</a></li>
+                <li class="dropdown-item" ngbDropdownItem (click)="onDelete()"><a >Delete Recipe</a></li>
             </ul>
         </div>
 
