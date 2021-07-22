@@ -24,6 +24,6 @@ export class RecipesListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-    this.subscription.unsubscribe()
+    this.subscription.unsubscribe() 
   }
 }
