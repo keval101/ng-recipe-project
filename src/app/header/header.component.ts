@@ -7,6 +7,7 @@ import { DataStorageService } from '../shared/data-storage.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  public isMenuCollapsed = true;
   
   @Output() navigation = new EventEmitter <string>();
   constructor(private dataStorageService:DataStorageService) { }

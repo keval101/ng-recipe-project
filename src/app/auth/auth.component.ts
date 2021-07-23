@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from './auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-auth',
@@ -9,7 +10,7 @@ import { AuthService } from './auth.service';
 })
 export class AuthComponent implements OnInit {
 
-  constructor(private _authService:AuthService) { }
+  constructor(private _authService:AuthService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -41,10 +42,14 @@ export class AuthComponent implements OnInit {
             console.log(resData)
             this.isLoading = false;
 
-          }, error => {
-            console.log(error)
-            this.isError = true;
-            this.error = "Error Occured !";
+          }, errorMessage => {
+
+            console.log(errorMessage)
+            this.isError = true
+
+            this.toastr.error(errorMessage, 'Error Occured!');
+
+            this.error = errorMessage
 
             setTimeout( () => this.isError=false , 3000)
               
