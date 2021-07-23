@@ -12,7 +12,7 @@ export class ResolveService implements Resolve<Recipe[]>{
   constructor(private dataStorageService:DataStorageService, private recipeService:RecipeService){}
 
   resolve(route:ActivatedRouteSnapshot, state:RouterStateSnapshot){
-
+    
     const recipes = this.recipeService.getRecipe()
     if(recipes.length === 0){
       return this.dataStorageService.fetchRecipe()

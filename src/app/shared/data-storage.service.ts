@@ -29,6 +29,5 @@ export class DataStorageService {
         this.recipeService.setRecipes(recipes)
       })
     )
-   
   }
 }
