@@ -1,4 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 import { DataStorageService } from '../shared/data-storage.service';
 
 @Component({
@@ -6,13 +8,17 @@ import { DataStorageService } from '../shared/data-storage.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit , OnDestroy{
   public isMenuCollapsed = true;
-  
+  isAuthenticate = false;
+  subscription: Subscription;
   @Output() navigation = new EventEmitter <string>();
-  constructor(private dataStorageService:DataStorageService) { }
+  constructor(private dataStorageService:DataStorageService , private _authService:AuthService) { }
 
   ngOnInit(): void {
+    this.subscription= this._authService.userStore.subscribe(
+      user => this.isAuthenticate = !!user
+    )
   }
   
   onSelect(feature:string){
@@ -26,6 +32,9 @@ export class HeaderComponent implements OnInit {
   }
   onFetchData(){
     this.dataStorageService.fetchRecipe().subscribe()
+  }
 
+  ngOnDestroy(){
+    this.subscription.unsubscribe()
   }
 }
