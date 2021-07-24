@@ -9,15 +9,16 @@ import { ResolveService } from './recipes/resolve.service';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 
 const appRoutes:Routes = [
-  {path:"" , redirectTo:'/recipes', pathMatch:"full"},
-  {path:"recipes" , component:RecipesComponent , children: [
+  // {path:"" , redirectTo:'/auth', pathMatch:"full"},
+    {path:'', component:AuthComponent},
+    {path:'auth', component:AuthComponent},
+    {path:"recipes" , component:RecipesComponent , children: [
     {path:"", component:RecipeStartComponent},
     {path:"new", component:RecipeEditComponent},
     {path:":id", component:RecipesDetailComponent, resolve:[ResolveService]},
     {path:":id/edit", component:RecipeEditComponent , resolve:[ResolveService]},
   ]},
   {path:"shopping-list" , component:ShoppingListComponent,},
-  {path:'auth', component:AuthComponent}
 ]
 
 @NgModule({
