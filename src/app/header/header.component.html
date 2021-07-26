@@ -20,17 +20,20 @@
       </ul>
 
     <ul class="navbar-nav ml-auto">
+      
       <li class="nav-item" *ngIf ="isAuthenticate">
-        <a class="nav-link" (click)="isMenuCollapsed = true" routerLinkActive="active">Logout</a>
+        <a class="nav-link" (click)="isMenuCollapsed = true" (click)='onLogOut()' routerLinkActive="active">Logout</a>
       </li>
 
+      
+
         <li class="nav-item dropdown" ngbDropdown *ngIf ="isAuthenticate">
-          <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ngbDropdownToggle>
+          <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ngbDropdownToggle>
             Manage <span class="caret"></span>
           </a>
           <div  class="dropdown-menu " ngbDropdownMenu >
-            <a class="dropdown-item" ngbDropdownItem (click)='onSaveData()'>Save Data</a>
-            <a class="dropdown-item" ngbDropdownItem (click)='onFetchData()'>Fetch Data</a>
+            <a class="dropdown-item" ngbDropdownItem (click)="isMenuCollapsed = true" (click)='onSaveData()'>Save Data</a>
+            <a class="dropdown-item" ngbDropdownItem (click)="isMenuCollapsed = true" (click)='onFetchData()'>Fetch Data</a>
           </div>
         </li>
     </ul>

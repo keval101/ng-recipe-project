@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { User } from './user.Model';
@@ -22,7 +23,7 @@ export class AuthService {
 
   userStore = new BehaviorSubject<User>(null)
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private router:Router) { }
 
   //----------------------- SIGN UP METHOD -----------------------
 
@@ -51,13 +52,50 @@ export class AuthService {
     )
   }
 
+
+//----------------------- AUTHO-LOGIN-LOGOUT METHOD -----------------------
+  autoLogin(){
+    const userData:{
+      email: string,
+      id: string,
+      _token : string,
+      _tokenExpritaionDate : string
+    } = JSON.parse(localStorage.getItem('userData'))
+    if(!userData){
+      return;
+    }
+
+    const loadedUser = new User( userData.email, userData.id, userData._token, new Date(userData._tokenExpritaionDate))
+
+    if(loadedUser.token){
+      this.userStore.next(loadedUser)
+      const expirationDuration = new Date(userData._tokenExpritaionDate).getTime() - new Date().getTime()
+      this.autoLogout(expirationDuration)
+    }
+  }
+
+  autoLogout(expirationDuration : number){
+    setTimeout(() => {
+      this.logout();
+    }, expirationDuration)
+  }
+//----------------------- LOGOUT METHOD -----------------------
+
+  logout(){
+    this.userStore.next(null);
+    this.router.navigate(['/auth']);
+    localStorage.removeItem('userData')
+  }
+
 //----------------------- USER STORE -----------------------
 
 private handleAuthentication ( email:string, userId:string, idToken:string, expiresIn:number){
 
   const expirationDate = new Date ( new Date().getTime() + expiresIn * 1000)
   const user = new User ( email, userId, idToken, expirationDate )
-  this.userStore.next(user)
+  this.userStore.next(user)   //NOTE Storing Data in Subject
+  this.autoLogout(expiresIn * 1000)
+  localStorage.setItem('userData', JSON.stringify(user))
 }
 
 //----------------------- ERROR HANDLING -----------------------
